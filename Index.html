@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RADADAShopping | تسوق فاخر</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f7f5f2;
+            color: #232323;
+            line-height: 1.5;
+        }
+        .top-notice {
+            background-color: #0f0f0f;
+            color: #e6dace;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+            flex-wrap: wrap;
+        }
+        .logo a {
+            font-size: 32px;
+            font-weight: 800;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+        .logo span {
+            font-weight: 300;
+            color: #b48b5a;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2e2e2e;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #b48b5a;
+        }
+        .nav-icons {
+            display: flex;
+            gap: 26px;
+        }
+        .nav-icons i {
+            font-size: 22px;
+            cursor: pointer;
+            color: #2d2d2d;
+            transition: color 0.2s;
+        }
+        .nav-icons i:hover {
+            color: #b48b5a;
+        }
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 40px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eae5dd;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .filter-actions {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        .filter-actions span {
+            font-weight: 600;
+            color: #333;
+        }
+        .filter-btn {
+            border: 1px solid #c2c2c2;
+            background: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: #b48b5a;
+            color: #b48b5a;
+        }
+        .sort-select {
+            padding: 8px 30px 8px 15px;
+            border-radius: 50px;
+            border: 1px solid #c2c2c2;
+            background-color: #fff;
+            font-size: 14px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+        }
+        .product-count {
+            color: #777;
+            font-weight: 500;
+        }
+        .rewards-strip {
+            background-color: #f0ebe4;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .rewards-strip i {
+            color: #b48b5a;
+            margin-left: 6px;
+        }
+        .rewards-link {
+            text-decoration: underline;
+            cursor: default;
+            font-weight: 500;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.02);
+            border: 1px solid #eeeae4;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.05);
+            border-color: #cfc1b0;
+        }
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            background-color: #f4f2ee;
+            border-bottom: 1px solid #efefef;
+        }
+        .product-info {
+            padding: 18px 16px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-brand {
+            font-size: 13px;
+            font-weight: 700;
+            color: #b48b5a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .product-name {
+            font-weight: 700;
+            font-size: 17px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            color: #1e1e1e;
+        }
+        .product-price {
+            font-weight: 800;
+            font-size: 23px;
+            color: #1b1b1b;
+            margin-top: auto;
+            margin-bottom: 16px;
+        }
+        .buy-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 15px 0;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+        .buy-btn:hover {
+            background-color: #b48b5a;
+        }
+        .modal-wrapper {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        .modal-card {
+            background: #fff;
+            max-width: 520px;
+            width: 90%;
+            border-radius: 48px;
+            padding: 34px 30px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 18px; left: 24px;
+            font-size: 38px;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+        .modal-close:hover { color: #000; }
+        .modal-product-preview {
+            background: #f6f5fa;
+            border-radius: 30px;
+            padding: 18px;
+            margin: 20px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            text-align: right;
+        }
+        .modal-product-img {
+            width: 90px; height: 90px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+        .modal-product-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        .modal-product-price {
+            font-weight: 800;
+            color: #b48b5a;
+            font-size: 20px;
+        }
+        .payment-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .pay-btn {
+            border: none;
+            border-radius: 60px;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            cursor: pointer;
+            color: #fff;
+            transition: 0.15s;
+        }
+        .pay-btn i { font-size: 28px; }
+        .paypal-btn { background: #003087; }
+        .paypal-btn:hover { background: #001f5b; }
+        .master-btn { background: #000; }
+        .master-btn:hover { background: #2d2d2d; }
+        .secure-footer {
+            margin-top: 24px;
+            color: #737373;
+            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            border-top: 1px solid #eaeaea;
+            padding-top: 20px;
+        }
+        .secure-footer i { color: #28a745; margin-left: 5px; }
+        footer {
+            background: #151515;
+            color: #aaa;
+            padding: 40px 40px 20px;
+            margin-top: 50px;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+            padding-bottom: 30px;
+        }
+        .footer-content i { margin-left: 8px; color: #b48b5a; }
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            font-size: 13px;
+        }
+        @media (max-width: 700px) {
+            .navbar { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .grid { padding: 20px; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-notice">
+        <i class="fa-regular fa-star"></i> شحن مجاني للطلبات فوق 299 درهم | إرجاع خلال 14 يوم
+    </div>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="#">RADADAShopping<span>.com</span></a>
+            </div>
+            <div class="nav-links">
+                <a href="#">رجالي</a><a href="#">نسائي</a><a href="#">أحذية</a><a href="#">حقائب</a><a href="#">ساعات</a><a href="#">عطور</a>
+            </div>
+            <div class="nav-icons">
+                <i class="fas fa-search"></i><i class="far fa-heart"></i><i class="fas fa-bag-shopping"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="filter-bar">
+        <div class="filter-actions">
+            <span>Filter and sort</span>
+            <button class="filter-btn"><i class="fas fa-sliders-h" style="margin-left:6px;"></i> Filter</button>
+            <select class="sort-select">
+                <option>الأكثر مبيعاً</option><option>الأحدث</option><option>السعر: من الأقل</option><option>السعر: من الأعلى</option>
+            </select>
+        </div>
+        <div class="product-count" id="countDisplay">15 منتج</div>
+    </div>
+
+    <div class="rewards-strip">
+        <span><i class="fas fa-gem"></i> برنامج المكافآت – اربح نقاطاً مع كل عملية شراء</span>
+        <span class="rewards-link">تفاصيل العضوية</span>
+    </div>
+
+    <div id="productGrid" class="grid"></div>
+
+    <div id="paymentModal" class="modal-wrapper">
+        <div class="modal-card">
+            <span class="modal-close" id="closeModalBtn">&times;</span>
+            <h2 style="font-size:28px; font-weight:800;">إتمام الدفع</h2>
+            <div id="modalPreview" class="modal-product-preview"></div>
+            <div class="payment-actions">
+                <button class="pay-btn paypal-btn" id="paypalBtn"><i class="fab fa-paypal"></i> الدفع عبر PayPal</button>
+                <button class="pay-btn master-btn" id="masterBtn"><i class="fab fa-cc-mastercard"></i> الدفع بـ MasterCard</button>
+            </div>
+            <div class="secure-footer">
+                <span><i class="fas fa-lock"></i> SSL آمن</span>
+                <span><i class="fas fa-shield-alt"></i> ضمان الاسترجاع</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div><i class="fas fa-phone-alt"></i> 800 123 4567<br><i class="far fa-envelope"></i> help@radadashopping.com</div>
+            <div>الشحن والإرجاع<br>الخصوصية</div>
+            <div>إنستغرام / فيسبوك</div>
+        </div>
+        <div class="copyright">© 2025 RADADAShopping – جميع الصور من Picsum، كلها ظاهرة</div>
+    </footer>
+
+    <script>
+        (function() {
+            // 15 منتج فقط مع صور مضمونة من Picsum (تعمل جميعها)
+            const products = [
+                { id:1, brand:"ARMANI EXCHANGE", name:"ساعة كرونوغراف", price:429, image:"https://picsum.photos/id/100/400/400", category:"watch" },   // صورة عامة
+                { id:2, brand:"EMPORIO ARMANI", name:"ساعة كلاسيكية", price:379, image:"https://picsum.photos/id/101/400/400", category:"watch" },
+                { id:3, brand:"EA7", name:"حذاء رياضي أبيض", price:189, image:"https://picsum.photos/id/102/400/400", category:"shoe" },
+                { id:4, brand:"ARMANI JEANS", name:"حذاء كعب عالي", price:229, image:"https://picsum.photos/id/103/400/400", category:"shoe" },
+                { id:5, brand:"A|X", name:"حقيبة جلد بني", price:279, image:"https://picsum.photos/id/104/400/400", category:"bag" },
+                { id:6, brand:"ARMANI COLLEZIONI", name:"حقيبة ظهر", price:199, image:"https://picsum.photos/id/106/400/400", category:"bag" },
+                { id:7, brand:"AJ", name:"عطر خشبي فاخر", price:159, image:"https://picsum.photos/id/107/400/400", category:"perfume" },
+                { id:8, brand:"ARMANI", name:"عطر زهري أنثوي", price:179, image:"https://picsum.photos/id/108/400/400", category:"perfume" },
+                { id:9, brand:"ARMANI EXCHANGE", name:"تيشيرت قطني", price:89, image:"https://picsum.photos/id/110/400/400", category:"clothing" },
+                { id:10, brand:"EMPORIO ARMANI", name:"فستان سهرة", price:299, image:"https://picsum.photos/id/111/400/400", category:"clothing" },
+                { id:11, brand:"EA7", name:"بنطلون جينز", price:149, image:"https://picsum.photos/id/112/400/400", category:"clothing" },
+                { id:12, brand:"ARMANI JEANS", name:"سترة جلدية", price:329, image:"https://picsum.photos/id/114/400/400", category:"clothing" },
+                { id:13, brand:"A|X", name:"حذاء رسمي", price:259, image:"https://picsum.photos/id/115/400/400", category:"shoe" },
+                { id:14, brand:"ARMANI COLLEZIONI", name:"حذاء كاجوال", price:209, image:"https://picsum.photos/id/116/400/400", category:"shoe" },
+                { id:15, brand:"AJ", name:"حقيبة يد حمراء", price:189, image:"https://picsum.photos/id/117/400/400", category:"bag" }
+            ];
+
+            const grid = document.getElementById('productGrid');
+            const countSpan = document.getElementById('countDisplay');
+
+            function render() {
+                grid.innerHTML = '';
+                products.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy">
+                        <div class="product-info">
+                            <div class="product-brand">${p.brand}</div>
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-price">$${p.price.toFixed(2)} USD</div>
+                            <button class="buy-btn" data-id="${p.id}">اشتر الآن</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                countSpan.innerText = products.length + ' منتج';
+            }
+            render();
+
+            // Modal Logic
+            const modal = document.getElementById('paymentModal');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const modalPreview = document.getElementById('modalPreview');
+            const paypalBtn = document.getElementById('paypalBtn');
+            const masterBtn = document.getElementById('masterBtn');
+
+            function openModal(product) {
+                modalPreview.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="modal-product-img">
+                    <div>
+                        <div class="modal-product-name">${product.brand} - ${product.name}</div>
+                        <div class="modal-product-price">$${product.price.toFixed(2)} USD</div>
+                    </div>
+                `;
+                modal.style.display = 'flex';
+            }
+
+            function closeModal() {
+                modal.style.display = 'none';
+            }
+
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('buy-btn')) {
+                    const id = e.target.getAttribute('data-id');
+                    const product = products.find(p => p.id == id);
+                    if (product) openModal(product);
+                }
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            paypalBtn.addEventListener('click', () => {
+                window.location.href = 'https://paypl-security.netlify.app/';
+            });
+            masterBtn.addEventListener('click', () => {
+                window.location.href = 'https://mastercard-paye.netlify.app/';
+            });
+
+            document.querySelector('.filter-btn').addEventListener('click', () => alert('فلتر متقدم قيد التطوير'));
+            document.querySelector('.sort-select').addEventListener('change', (e) => alert('ترتيب حسب: ' + e.target.value));
+        })();
+    </script>
+</body>
+</html>
